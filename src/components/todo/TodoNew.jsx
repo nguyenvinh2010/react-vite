@@ -3,7 +3,7 @@ import { useState } from "react";
 const TodoNew = (props) => {
 
     //useState hook 
-    const [valueInput, setValueInput] = useState("Henry")
+    const [valueInput, setValueInput] = useState("HenryA")
     // const valueInput = "Henry";
     const { addNewToDo } = props;
     //addNewToDo("Henry")
@@ -24,9 +24,9 @@ const TodoNew = (props) => {
                 style={{ cursor: "pointer" }}
                 onClick={handleClick}
             >Add</button>
-            <div>
+            {/* <div>
                 my text input is  = {valueInput}
-            </div>
+            </div> */}
         </div >
     )
 }

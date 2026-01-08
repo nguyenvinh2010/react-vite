@@ -1,16 +1,27 @@
 const TodoData = (props) => {
-    const { name, age, data } = props;
-    //console.log(">>>>check props:", props)
+    const { todoList, deleteItem } = props;
+    const handleClick = (id) => {
+        deleteItem(id)
+    }
     return (
         <div className="todo-data">
-            <div>My name is {name}</div>
-            <div>Learning React</div>
-            <div>Watching YouToBe</div>
-            <div>
+            {
+                todoList.map((item, index) => {
+                    return (
+                        <div key={index}>
+                            {item.name}
+                            <button
+                                onClick={() => handleClick(item.id)}
+                            >Delete</button>
+                        </div>
+                    )
+                })
+            }
+            {/* <div>
                 {JSON.stringify(props.todoList)}
-            </div>
+            </div> */}
 
-        </div>
+        </div >
     )
 }
 export default TodoData;

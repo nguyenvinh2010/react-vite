@@ -6,8 +6,8 @@ import { useState } from 'react';
 const App = () => {
 
   const [todoList, setTodoList] = useState([
-    { id: 1, name: "tex" },
-    { id: 2, name: "bcv" },
+    // { id: 1, name: "tex" },
+    // { id: 2, name: "bcvcc" },
   ])
   const bi = "Henry";
   const age = 25;
@@ -26,6 +26,10 @@ const App = () => {
   const randomIntFromInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
+  const deleteItem = (id) => {
+    const newToDo = todoList.filter(item => item.id !== id)
+    setTodoList(newToDo);
+  }
   // todoList.push(newToDo)
   // setTodoList(todoList)
   //addNewToDo()
@@ -35,15 +39,17 @@ const App = () => {
       <TodoNew
         addNewToDo={addNewToDo}
       />
-      <TodoData
-        name={bi}
-        age={age}
-        data={data}
-        todoList={todoList}
-      />
-      <div className='todo-image'>
-        <img src={reactLogo} />
-      </div>
+      {todoList.length > 0 ?
+        <TodoData
+          todoList={todoList}
+          deleteItem={deleteItem}
+        />
+        :
+        <div className='todo-image'>
+          <img src={reactLogo} />
+        </div>
+      }
+
     </div>
   )
 }
