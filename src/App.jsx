@@ -3,6 +3,9 @@ import TodoData from './components/todo/TodoData';
 import TodoNew from './components/todo/TodoNew';
 import reactLogo from './assets/react.svg';
 import { useState } from 'react';
+import Header from './components/layout/header';
+import Footer from './components/layout/footer';
+import { Outlet } from 'react-router-dom';
 const App = () => {
 
   const [todoList, setTodoList] = useState([
@@ -34,23 +37,28 @@ const App = () => {
   // setTodoList(todoList)
   //addNewToDo()
   return (
-    <div className="todo-container">
-      <div className="todo-title">Todo List</div>
-      <TodoNew
-        addNewToDo={addNewToDo}
-      />
-      {todoList.length > 0 ?
-        <TodoData
-          todoList={todoList}
-          deleteItem={deleteItem}
+    <>
+      <Header />
+      <div className="todo-container">
+        <div className="todo-title">Todo List</div>
+        <TodoNew
+          addNewToDo={addNewToDo}
         />
-        :
-        <div className='todo-image'>
-          <img src={reactLogo} />
-        </div>
-      }
+        {todoList.length > 0 ?
+          <TodoData
+            todoList={todoList}
+            deleteItem={deleteItem}
+          />
+          :
+          <div className='todo-image'>
+            <img src={reactLogo} />
+          </div>
+        }
 
-    </div>
+      </div>
+      <Outlet />
+      <Footer />
+    </>
   )
 }
 
