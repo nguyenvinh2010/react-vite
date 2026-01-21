@@ -2,6 +2,7 @@ import { Input } from 'antd';
 import { Button, Flex } from 'antd';
 import { useState } from 'react';
 import axios from 'axios';
+import api from '../token/api';
 const UserForm = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
@@ -23,7 +24,11 @@ const UserForm = () => {
         //         Authorization: `Bearer ${accessToken}`
         //     }
         // });
-        axios.post(URL_BACKEND, data);
+        api.post(URL_BACKEND, data);
+
+        // api.get('api/v1/user')
+        //     .then(res => console.log(res.data))
+        //     .catch(err => console.error(err));
 
         console.log(">>>check value: ", { fullName, email, passWord, phone })
     }
