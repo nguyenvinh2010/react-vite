@@ -1,37 +1,35 @@
-import { Input } from 'antd';
+import { Input, notification } from 'antd';
 import { Button, Flex } from 'antd';
 import { useState } from 'react';
 import axios from 'axios';
 import api from '../token/api';
+import { createUserAPI } from '../../services/api.service';
 const UserForm = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [passWord, setPassWord] = useState("");
     const [phone, setPhone] = useState("");
     //console.log(">>>check fullname", fullName, email, passWord, phone)
-    const handleClick = () => {
-        const URL_BACKEND = "http://localhost:8080/api/v1/user";
-        const data = {
-            fullName: fullName,
-            passWord: passWord,
-            email: email,
-            phone: phone
+    const handleClick = async () => {
+
+        const rest = await createUserAPI(fullName, email, passWord, phone);
+        console.log("check rest", rest)
+
+        if (rest.data) {
+            notification.success({
+                message: "create user",
+                description: "tạo user thành công"
+            })
+        } else {
+            notification.error({
+                message: "Error create user",
+                description: JSON.stringify(rest.message)
+            })
         }
-        // const URL_BACKEND = "http://localhost:8080/api/v1/auth/login";
 
-        // axios.get(URL_BACKEND, {
-        //     headers: {
-        //         Authorization: `Bearer ${accessToken}`
-        //     }
-        // });
-        api.post(URL_BACKEND, data);
-
-        // api.get('api/v1/user')
-        //     .then(res => console.log(res.data))
-        //     .catch(err => console.error(err));
-
-        console.log(">>>check value: ", { fullName, email, passWord, phone })
+        //console.log("check res>>>", rest.data.data);
     }
+
     return (
         <div className="user-form">
 
