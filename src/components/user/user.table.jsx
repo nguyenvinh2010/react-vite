@@ -4,9 +4,11 @@ import { fetchAllUserApi } from '../../services/api.service';
 
 const UserTable = () => {
     const [dataUser, setDataUser] = useState([]);
-    // useEffect(() => {
-    //     loadUser();
-    // })
+
+    useEffect(() => {
+        console.log(">>>run ef 1")
+        loadUser();
+    }, [])
     const columns = [
         {
             title: 'ID',
@@ -26,27 +28,21 @@ const UserTable = () => {
     ];
     const loadUser = async () => {
         const res = await fetchAllUserApi()
-        console.log("???res", res.data);
-        //setDataUser(res.data?.data ?? res.data ?? []);
+        //console.log("???res", res.data);
+        setDataUser(res.data?.data ?? res.data ?? []);
 
         // nếu API trả về res.data là array
-        // if (Array.isArray(res.data)) {
-        //     setDataUser(res.data);
-        // }
-
-        // // nếu API trả về res.data.data
-        // else if (Array.isArray(res.data?.data)) {
+        // if (res.data?.data !== null && res.data?.data !== undefined) {
         //     setDataUser(res.data.data);
-        // }
-
-        // // fallback
-        // else {
+        // } else if (res.data !== null && res.data !== undefined) {
+        //     setDataUser(res.data);
+        // } else {
         //     setDataUser([]);
         // }
 
     }
-    loadUser();
-
+    //loadUser();
+    console.log(">>>run ef 000")
     return (
         <Table columns={columns} dataSource={dataUser} rowKey={"_id"} />
     )
